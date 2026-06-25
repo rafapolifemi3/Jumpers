@@ -2,8 +2,11 @@
 # -*- coding: utf-8 -*-
 import pygame
 
-from code.const import WIN_WIDTH, WIN_HEIGHT
+
+from code.const import WIN_WIDTH, WIN_HEIGHT, MENU_OPTION
 from code.menu import Menu
+from code.demo import Demo
+
 
 class Game:
     def __init__(self):
@@ -13,5 +16,13 @@ class Game:
     def run(self, ):
         while True:
             menu = Menu(self.window)
-            menu.run()
-            pass
+            menu_return = menu.run()
+
+            if menu_return in [MENU_OPTION[0], MENU_OPTION[1]]:
+                demo = Demo(self.window, 'Demo0Bg', menu_return)
+                demo_return = demo.run()
+            elif menu_return == MENU_OPTION[3]:
+                pygame.quit() # Close Window
+                quit() # End Game
+            else:
+                pass
